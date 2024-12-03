@@ -1,18 +1,23 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "../components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, Users, Calendar } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Heart, Phone, Users, Calendar, BookOpen, ArrowRight } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const Support = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleJoinGroup = () => {
+  const handleContactSupport = () => {
     toast({
-      title: "Support Group Request",
-      description: "Thank you for your interest. We'll contact you about the next meeting.",
+      title: "Support Request Sent",
+      description: "Our team will contact you shortly at 1-800-LEGAL-HELP",
+    });
+  };
+
+  const handleGuideDownload = () => {
+    toast({
+      title: "Guide Downloaded",
+      description: "Check your downloads folder for the complete holiday guide.",
     });
   };
 
@@ -20,28 +25,99 @@ const Support = () => {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Emotional Support</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Emotional Support for Fathers</h1>
+          <p className="text-xl text-gray-600">Guidance and support through your journey</p>
+        </div>
+
+        {/* Holiday Guide Section */}
+        <Card className="mb-12">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-3xl">
+              <Calendar className="text-primary h-8 w-8" />
+              Coping with Divorce During the Holidays
+            </CardTitle>
+            <CardDescription className="text-lg">
+              A comprehensive guide to help you navigate the holiday season
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="prose max-w-none">
+              <h3 className="text-xl font-semibold mb-4">Understanding the Emotional Impact</h3>
+              <p className="text-gray-600 mb-4">
+                The holiday season can intensify feelings of loneliness, grief, and frustration. 
+                Common challenges include:
+              </p>
+              <ul className="list-disc pl-6 text-gray-600 mb-6">
+                <li>Loneliness and isolation from former traditions</li>
+                <li>Grief over changes in family structure</li>
+                <li>Frustration with limited time with children</li>
+                <li>Anxiety about new social situations</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-4">Practical Strategies</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <h4 className="font-semibold mb-2">Planning Ahead</h4>
+                  <ul className="list-disc pl-6 text-gray-600">
+                    <li>Create detailed visitation schedules</li>
+                    <li>Plan meaningful activities</li>
+                    <li>Arrange travel early</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <h4 className="font-semibold mb-2">Self-Care Tips</h4>
+                  <ul className="list-disc pl-6 text-gray-600">
+                    <li>Maintain regular exercise</li>
+                    <li>Practice mindfulness</li>
+                    <li>Seek support when needed</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+              <Button 
+                onClick={handleGuideDownload}
+                className="flex items-center gap-2"
+              >
+                <BookOpen className="h-4 w-4" />
+                Download Complete Guide
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={handleContactSupport}
+                className="flex items-center gap-2"
+              >
+                <Phone className="h-4 w-4" />
+                Contact Support Team
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Support Resources */}
+        <div className="grid md:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Heart className="text-primary" />
-                Coping with Divorce
+                <Users className="text-primary" />
+                Support Groups
               </CardTitle>
-              <CardDescription>Essential strategies and resources for emotional healing</CardDescription>
+              <CardDescription>Connect with others who understand</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">
-                Divorce can be one of life's most challenging experiences. Our support network provides:
+                Join our weekly support groups led by experienced counselors.
+                Share experiences and learn from others in similar situations.
               </p>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Professional counseling referrals</li>
-                <li>Peer support groups</li>
-                <li>Coping strategies</li>
-                <li>Stress management techniques</li>
-              </ul>
-              <Button onClick={handleJoinGroup} className="w-full">
+              <Button 
+                onClick={() => toast({
+                  title: "Group Registration",
+                  description: "You'll receive details about the next meeting via email.",
+                })}
+                className="w-full"
+              >
                 Join Support Group
               </Button>
             </CardContent>
@@ -50,44 +126,25 @@ const Support = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Calendar className="text-primary" />
-                Holiday Support
+                <Heart className="text-primary" />
+                24/7 Support Line
               </CardTitle>
-              <CardDescription>Managing emotions during special occasions</CardDescription>
+              <CardDescription>We're here when you need us</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">
-                The holiday season can be particularly challenging. We offer guidance on:
+                Our trained counselors are available 24/7 to provide emotional support
+                and guidance when you need it most.
               </p>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Creating new traditions</li>
-                <li>Planning meaningful celebrations</li>
-                <li>Managing expectations</li>
-                <li>Finding joy in different circumstances</li>
-              </ul>
-              <Button onClick={() => navigate('/parenting')} variant="outline" className="w-full">
-                Holiday Planning Tips
+              <Button 
+                variant="outline"
+                onClick={handleContactSupport}
+                className="w-full"
+              >
+                Call 1-800-SUPPORT
               </Button>
             </CardContent>
           </Card>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-            <Phone className="text-primary" />
-            24/7 Support Hotline
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Our trained counselors are available 24/7 to provide emotional support and guidance.
-            Don't hesitate to reach out - you're not alone in this journey.
-          </p>
-          <Button 
-            onClick={() => window.location.href = 'tel:1-800-SUPPORT'} 
-            variant="secondary"
-            className="w-full md:w-auto"
-          >
-            Call 1-800-SUPPORT
-          </Button>
         </div>
       </div>
     </div>
