@@ -1,16 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "../components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, Users, Calendar, BookOpen, ArrowRight, Download, Mail, FileText } from "lucide-react";
+import { Heart, Phone, Users, Calendar, BookOpen, ArrowRight, Download, Mail, FileText, BookmarkPlus, Shield } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const Support = () => {
   const { toast } = useToast();
 
-  const handleDownloadGuide = () => {
+  const handleDownloadGuide = (guideName: string) => {
     toast({
-      title: "Guide Downloaded",
-      description: "The holiday coping guide has been downloaded to your device.",
+      title: `${guideName} Downloaded`,
+      description: "The guide has been downloaded to your device.",
     });
     // In a real app, this would trigger an actual download
   };
@@ -35,12 +35,98 @@ const Support = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Coping with Divorce During the Holidays
+            Support Resources & Guides
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A comprehensive guide to help fathers navigate the holiday season while dealing with divorce.
-            Find support, resources, and practical strategies for creating meaningful experiences.
+            Access our comprehensive collection of guides, resources, and support materials designed to help you navigate your journey.
           </p>
+        </div>
+
+        {/* Featured Guides Section */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calendar className="text-primary h-6 w-6" />
+                Holiday Guide
+              </CardTitle>
+              <CardDescription>
+                Managing holidays and special occasions
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                Learn strategies for:
+                <ul className="list-disc pl-6 mb-4">
+                  <li>Planning meaningful celebrations</li>
+                  <li>Managing emotions</li>
+                  <li>Creating new traditions</li>
+                </ul>
+              </p>
+              <Button 
+                onClick={() => handleDownloadGuide("Holiday Planning Guide")}
+                className="w-full"
+              >
+                <Download className="mr-2 h-4 w-4" /> Download Guide
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookmarkPlus className="text-primary h-6 w-6" />
+                Co-Parenting Handbook
+              </CardTitle>
+              <CardDescription>
+                Essential co-parenting strategies
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                Comprehensive guide covering:
+                <ul className="list-disc pl-6 mb-4">
+                  <li>Communication techniques</li>
+                  <li>Conflict resolution</li>
+                  <li>Shared decision making</li>
+                </ul>
+              </p>
+              <Button 
+                onClick={() => handleDownloadGuide("Co-Parenting Handbook")}
+                className="w-full"
+              >
+                <Download className="mr-2 h-4 w-4" /> Download Handbook
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="text-primary h-6 w-6" />
+                Legal Rights Guide
+              </CardTitle>
+              <CardDescription>
+                Understanding your legal rights
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                Essential information about:
+                <ul className="list-disc pl-6 mb-4">
+                  <li>Custody arrangements</li>
+                  <li>Visitation rights</li>
+                  <li>Legal procedures</li>
+                </ul>
+              </p>
+              <Button 
+                onClick={() => handleDownloadGuide("Legal Rights Guide")}
+                className="w-full"
+              >
+                <Download className="mr-2 h-4 w-4" /> Download Guide
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Understanding Emotional Impact Section */}
