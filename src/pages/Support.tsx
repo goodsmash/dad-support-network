@@ -1,23 +1,31 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "../components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, Users, Calendar, BookOpen, ArrowRight, Download, Mail } from "lucide-react";
+import { Heart, Phone, Users, Calendar, BookOpen, ArrowRight, Download, Mail, FileText } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const Support = () => {
   const { toast } = useToast();
 
-  const handleContactSupport = () => {
+  const handleDownloadGuide = () => {
     toast({
-      title: "Support Request Sent",
-      description: "Our team will contact you shortly at 1-800-LEGAL-HELP",
+      title: "Guide Downloaded",
+      description: "The holiday coping guide has been downloaded to your device.",
+    });
+    // In a real app, this would trigger an actual download
+  };
+
+  const handleJoinGroup = () => {
+    toast({
+      title: "Support Group Registration",
+      description: "Thank you for your interest. We'll send you details about the next meeting.",
     });
   };
 
-  const handleGuideDownload = () => {
+  const handleContactSupport = () => {
     toast({
-      title: "Guide Downloaded",
-      description: "Check your downloads folder for the complete holiday guide.",
+      title: "Support Request Received",
+      description: "Our team will contact you shortly at the provided number.",
     });
   };
 
@@ -36,7 +44,7 @@ const Support = () => {
         </div>
 
         {/* Understanding Emotional Impact Section */}
-        <Card className="mb-8">
+        <Card className="mb-8 animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
               <Heart className="text-primary h-6 w-6" />
@@ -70,13 +78,21 @@ const Support = () => {
                   <li>Seek professional support when needed</li>
                   <li>Connect with others who understand</li>
                 </ul>
+                <Button 
+                  onClick={handleJoinGroup}
+                  className="mt-4 w-full"
+                  variant="secondary"
+                >
+                  <Users className="mr-2" />
+                  Join Support Group
+                </Button>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Planning Ahead Section */}
-        <Card className="mb-8">
+        <Card className="mb-8 animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
               <Calendar className="text-primary h-6 w-6" />
@@ -86,77 +102,73 @@ const Support = () => {
           <CardContent className="space-y-4">
             <p className="text-gray-600">
               Preparation is key to managing holiday stress and creating positive experiences.
-              Consider these important aspects when planning:
+              Download our comprehensive guide for detailed planning strategies.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold mb-2">Create a Detailed Plan</h3>
+                <h3 className="font-semibold mb-2">Holiday Planning Guide Includes:</h3>
                 <ul className="list-disc pl-6 text-gray-600 space-y-2">
-                  <li>Work out custody arrangements in advance</li>
-                  <li>Plan meaningful activities with your children</li>
-                  <li>Arrange travel and accommodations early</li>
-                  <li>Create a budget for gifts and activities</li>
+                  <li>Custody arrangement templates</li>
+                  <li>Activity planning worksheets</li>
+                  <li>Communication guidelines</li>
+                  <li>Self-care checklists</li>
                 </ul>
+                <Button 
+                  onClick={handleDownloadGuide}
+                  className="mt-4 w-full"
+                >
+                  <FileText className="mr-2" />
+                  Download Complete Guide
+                </Button>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Support Resources</h3>
-                <div className="space-y-4">
-                  <Button 
-                    onClick={handleGuideDownload}
-                    className="w-full flex items-center justify-center gap-2"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download Holiday Planning Guide
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={handleContactSupport}
-                    className="w-full flex items-center justify-center gap-2"
-                  >
-                    <Phone className="h-4 w-4" />
-                    Contact Support Team
-                  </Button>
-                </div>
+                <h3 className="font-semibold mb-2">24/7 Support Available</h3>
+                <p className="text-gray-600 mb-4">
+                  Our support team is here to help you navigate difficult moments
+                  during the holiday season.
+                </p>
+                <Button 
+                  variant="outline"
+                  onClick={handleContactSupport}
+                  className="w-full"
+                >
+                  <Phone className="mr-2" />
+                  Contact Support Team
+                </Button>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Contact Support Section */}
-        <Card>
+        {/* Resources Section */}
+        <Card className="animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
-              <Users className="text-primary h-6 w-6" />
-              Get Support Today
+              <BookOpen className="text-primary h-6 w-6" />
+              Additional Resources
             </CardTitle>
-            <CardDescription className="text-lg">
-              Don't face this journey alone. Our support team is here to help 24/7.
-            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center p-4">
                 <Phone className="h-8 w-8 mx-auto mb-2 text-primary" />
-                <h3 className="font-semibold mb-2">Call Us</h3>
-                <p className="text-gray-600">1-800-LEGAL-HELP</p>
+                <h3 className="font-semibold mb-2">24/7 Hotline</h3>
+                <p className="text-gray-600">1-800-SUPPORT</p>
               </div>
               <div className="text-center p-4">
                 <Mail className="h-8 w-8 mx-auto mb-2 text-primary" />
                 <h3 className="font-semibold mb-2">Email Support</h3>
-                <p className="text-gray-600">support@dadsupport.com</p>
+                <p className="text-gray-600">help@dadsupport.com</p>
               </div>
               <div className="text-center p-4">
                 <Users className="h-8 w-8 mx-auto mb-2 text-primary" />
-                <h3 className="font-semibold mb-2">Support Groups</h3>
+                <h3 className="font-semibold mb-2">Local Groups</h3>
                 <Button 
                   variant="secondary"
-                  onClick={() => toast({
-                    title: "Group Registration",
-                    description: "You'll receive details about the next meeting via email.",
-                  })}
+                  onClick={handleJoinGroup}
                   className="mt-2"
                 >
-                  Join a Group
+                  Find Nearby Groups
                 </Button>
               </div>
             </div>
