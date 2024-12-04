@@ -1,18 +1,15 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "../components/Navigation";
+import { guides } from "@/utils/guides";
+import GuideCard from "@/components/GuideCard";
+import SupportHeader from "@/components/SupportHeader";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heart, Book, Calendar, Users, Download, BookOpen, MessageSquare, Star } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { Users, Star } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Parenting = () => {
   const { toast } = useToast();
-
-  const handleDownloadGuide = (guideName: string) => {
-    toast({
-      title: `${guideName} Downloaded`,
-      description: "The guide has been downloaded to your device.",
-    });
-  };
+  const parentingGuides = guides.filter(guide => guide.category === 'parenting');
 
   const handleWorkshopSignup = () => {
     toast({
@@ -25,86 +22,16 @@ const Parenting = () => {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Parenting Resources & Guides</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover practical strategies, expert advice, and supportive resources to help you be the best parent you can be.
-          </p>
-        </div>
+        <SupportHeader 
+          title="Parenting Resources & Guides"
+          description="Discover practical strategies, expert advice, and supportive resources to help you be the best parent you can be."
+        />
         
         {/* Featured Parenting Guides */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Heart className="text-primary h-6 w-6" />
-                Connection Guide
-              </CardTitle>
-              <CardDescription>Building stronger bonds</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Quality time activities</li>
-                <li>Communication tips</li>
-                <li>Age-appropriate bonding</li>
-                <li>Creating traditions</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadGuide("Parent-Child Connection Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Guide
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Star className="text-primary h-6 w-6" />
-                Age-Specific Activities
-              </CardTitle>
-              <CardDescription>Tailored engagement strategies</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Toddler activities</li>
-                <li>School-age projects</li>
-                <li>Teen engagement</li>
-                <li>Family adventures</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadGuide("Activities Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Guide
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="text-primary h-6 w-6" />
-                Communication Tools
-              </CardTitle>
-              <CardDescription>Effective parent-child dialogue</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Active listening</li>
-                <li>Emotional support</li>
-                <li>Conflict resolution</li>
-                <li>Building trust</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadGuide("Communication Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Guide
-              </Button>
-            </CardContent>
-          </Card>
+          {parentingGuides.map(guide => (
+            <GuideCard key={guide.id} guide={guide} />
+          ))}
         </div>
 
         {/* Workshops Section */}
@@ -138,7 +65,7 @@ const Parenting = () => {
               </ul>
               <Button 
                 variant="outline" 
-                onClick={() => handleDownloadGuide("Workshop Materials")}
+                onClick={handleWorkshopSignup}
                 className="w-full"
               >
                 Access Library
@@ -172,7 +99,7 @@ const Parenting = () => {
               </p>
               <Button 
                 variant="outline" 
-                onClick={() => handleDownloadGuide("Meetup Schedule")}
+                onClick={handleWorkshopSignup}
                 className="w-full"
               >
                 View Schedule

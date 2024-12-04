@@ -1,18 +1,15 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "../components/Navigation";
+import { guides } from "@/utils/guides";
+import GuideCard from "@/components/GuideCard";
+import SupportHeader from "@/components/SupportHeader";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Scale, FileText, Users, Bookmark, Download, MessageSquare, Calendar } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { MessageSquare } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Legal = () => {
   const { toast } = useToast();
-
-  const handleDownloadResource = (resourceName: string) => {
-    toast({
-      title: `${resourceName} Downloaded`,
-      description: "The resource has been downloaded to your device.",
-    });
-  };
+  const legalGuides = guides.filter(guide => guide.category === 'legal');
 
   const handleConsultation = () => {
     toast({
@@ -25,86 +22,16 @@ const Legal = () => {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Legal Resources & Support</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Access comprehensive legal resources and professional support to understand and protect your rights as a father.
-          </p>
-        </div>
+        <SupportHeader 
+          title="Legal Resources & Support"
+          description="Access comprehensive legal resources and professional support to understand and protect your rights as a father."
+        />
 
         {/* Legal Resource Guides */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Scale className="text-primary h-6 w-6" />
-                Custody Rights Guide
-              </CardTitle>
-              <CardDescription>Understanding custody arrangements</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Types of custody explained</li>
-                <li>Your rights as a father</li>
-                <li>Documentation needed</li>
-                <li>Court procedures</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadResource("Custody Rights Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Guide
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="text-primary h-6 w-6" />
-                Visitation Planning
-              </CardTitle>
-              <CardDescription>Organizing time with your children</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Visitation schedules</li>
-                <li>Holiday arrangements</li>
-                <li>Travel considerations</li>
-                <li>Schedule modifications</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadResource("Visitation Planning Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Template
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="text-primary h-6 w-6" />
-                Mediation Guide
-              </CardTitle>
-              <CardDescription>Effective dispute resolution</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside text-gray-600 mb-4">
-                <li>Mediation process</li>
-                <li>Preparing for sessions</li>
-                <li>Communication tips</li>
-                <li>Agreement writing</li>
-              </ul>
-              <Button 
-                onClick={() => handleDownloadResource("Mediation Guide")}
-                className="w-full"
-              >
-                <Download className="mr-2 h-4 w-4" /> Download Guide
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {legalGuides.map(guide => (
+            <GuideCard key={guide.id} guide={guide} />
+          ))}
         </div>
 
         {/* Legal Consultation Section */}
@@ -136,7 +63,7 @@ const Legal = () => {
                 <li>Document preparation</li>
                 <li>Court representation</li>
               </ul>
-              <Button variant="outline" onClick={() => handleDownloadResource("Legal Network Directory")} className="w-full">
+              <Button variant="outline" onClick={handleConsultation} className="w-full">
                 Download Directory
               </Button>
             </div>
